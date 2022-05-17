@@ -4,15 +4,15 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   const emailRef = useRef(null);
-  const passwrdRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const SubmitHandler = (event) => {
     event.preventDefault();
 
     const email = emailRef.current.value;
-    const passwrd = passwrdRef.current.value;
+    const password = passwordRef.current.value;
 
-    console.log(email, passwrd);
+    console.log(email.length, password.length);
   };
 
   return (
@@ -53,7 +53,7 @@ export default function LoginPage() {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
-                  ref={passwrdRef}
+                  ref={passwordRef}
                 />
               </div>
             </div>
