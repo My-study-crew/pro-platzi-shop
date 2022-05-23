@@ -1,6 +1,7 @@
 import React, { useState, useContext, createContext } from 'react';
 import Cookie from 'js-cookie';
-import Axios from 'axios';
+import axios from 'axios';
+import endPoints from '@services/api/';
 
 const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ export function ProviderAuth({ children }) {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
-export const UseAuth = () => {
+export const useAuth = () => {
   return useContext(AuthContext);
 };
 
@@ -18,11 +19,16 @@ function useProviderAuth() {
   const [user, setUser] = useState(null);
 
   const signIn = async (email, password) => {
-    setUser('login');
-    const mail = email;
-    const pass = password;
-    console.log(mail, pass);
+    const options = {
+      headers: {
+        accept: '*/*',
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const { data: access_token } = await axios.post(endPoints.auth.login, { email, password }, options);
+    console.log(access_token);
   };
 
-  return user, signIn;
+  return { user, signIn };
 }

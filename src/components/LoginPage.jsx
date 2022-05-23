@@ -1,10 +1,12 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useRef } from 'react';
+import { useAuth } from '@hooks/useAuth';
 import Link from 'next/link';
 
 export default function LoginPage() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const auth = useAuth();
 
   const SubmitHandler = (event) => {
     event.preventDefault();
@@ -12,7 +14,9 @@ export default function LoginPage() {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    console.log(email.length, password.length);
+    auth.signIn(email, password).then(() => {
+      console.log('Test executed correctly');
+    });
   };
 
   return (
