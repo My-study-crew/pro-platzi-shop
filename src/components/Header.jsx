@@ -22,9 +22,10 @@ function classNames(...classes) {
 export default function Header() {
   const auth = useAuth();
 
+  // Data null because of auth errors
   const userData = {
-    name: auth.user.name,
-    email: auth.use.email,
+    name: auth?.user?.name,
+    email: auth?.user?.email,
     imageUrl: auth?.user?.avatar,
   };
 
