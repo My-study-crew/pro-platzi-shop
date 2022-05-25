@@ -1,13 +1,15 @@
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-];
+import Link from 'next/link';
+
+// const people = [
+//   {
+//     name: 'Jane Cooper',
+//     title: 'Regional Paradigm Technician',
+//     department: 'Optimization',
+//     role: 'Admin',
+//     email: 'jane.cooper@example.com',
+//     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+//   },
+// ];
 
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
@@ -69,14 +71,14 @@ export default function Dashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/" className="text-indigo-600 hover:text-indigo-900">
+                        <Link href="/" className="text-indigo-600 hover:text-indigo-900">
                           Edit
-                        </a>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/" className="text-indigo-600 hover:text-indigo-900">
+                        <Link href="/" className="text-indigo-600 hover:text-indigo-900">
                           Delete
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                   ))}
