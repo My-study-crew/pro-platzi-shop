@@ -3,19 +3,16 @@ import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
 import { Chart } from '@common/Chart';
 
-const PRODUCT_LIMIT = 5;
-const PRODUCT_OFFSET = 5;
+const PRODUCT_LIMIT = 60;
+const PRODUCT_OFFSET = 60;
 
 export default function Dashboard() {
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, PRODUCT_OFFSET));
 
-  const category = products?.map((product) => product.category);
-  const categoryName = category?.map((category) => category.name);
+  const categoryList = products?.map((product) => product.category);
+  const categoryName = categoryList?.map((category) => category.name);
 
-  const countOcurrences = (arr) =>
-    arr?.reduce((prev, curr) => {
-      (prev[curr] = ++prev[curr] || 1), prev;
-    }, {});
+  const countOcurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
 
   const data = {
     datasets: [
