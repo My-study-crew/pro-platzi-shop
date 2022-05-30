@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import { useState } from 'react';
-import Modal from '@common/Modal';
 import { PlusIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
+import Modal from '@common/Modal';
+import FormProduct from '@components/FormProduct';
 
 export default function products() {
   const [open, setOpen] = useState(false);
@@ -92,7 +93,7 @@ export default function products() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <h1>Hola</h1>
+        <FormProduct />
       </Modal>
     </>
   );
