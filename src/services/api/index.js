@@ -4,6 +4,7 @@ const VERSION = process.env.NEXT_PUBLIC_API_VERSION;
 const endPoints = {
   products: {
     addProducts: `${API}/api/${VERSION}/products`,
+    allProducts: `${API}/api/${VERSION}/products`,
     getProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
     getProducts: (limit, offset) => `${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
     updateProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
