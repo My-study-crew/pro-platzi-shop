@@ -6,12 +6,12 @@ import FormProduct from '@components/FormProduct';
 import Alert from '@common/Alert';
 import axios from 'axios';
 import endPoints from '@services/api';
-import useAlert from '@common/hooks';
+import useAlert from '@hooks/useAlert';
 
 export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const [alert, setAlert, toggleAlert] = useAlert();
+  const { alert, setAlert, toggleAlert } = useAlert();
 
   useEffect(() => {
     async function getProducts() {
