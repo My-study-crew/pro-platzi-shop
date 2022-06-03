@@ -1,8 +1,10 @@
 import { useRef } from 'react';
-import { addProduct } from '@services/api/products';
+import { useRouter } from 'next/router';
+import { addProduct, updateProduct } from '@services/api/products';
 
 export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
+  const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,24 +18,40 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       images: [formData.get('images').name],
     };
 
-    addProduct(data)
-      .then((response) => {
-        setAlert({
-          active: true,
-          message: `Product added correctly with id: ${response.id}`,
-          type: 'success',
-          autoClose: false,
+    if (product) {
+      updateProduct(product.id, data)
+        .then(() => {
+          router.push('/dashboard/products');
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: `Error updating product ${product.id}
+            ${error.message}`,
+            type: 'error',
+            autoClose: false,
+          });
         });
-        setOpen(false);
-      })
-      .catch((error) => {
-        setAlert({
-          active: true,
-          message: `Error adding product ${error.message}`,
-          type: 'error',
-          autoClose: false,
+    } else {
+      addProduct(data)
+        .then((response) => {
+          setAlert({
+            active: true,
+            message: `Product added correctly with id: ${response.id}`,
+            type: 'success',
+            autoClose: false,
+          });
+          setOpen(false);
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: `Error adding product ${error.message}`,
+            type: 'error',
+            autoClose: false,
+          });
         });
-      });
+    }
   };
 
   return (
@@ -94,7 +112,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
                 id="description"
                 autoComplete="description"
                 rows="3"
-                className="form-textarea mt-1 block w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="form-textarea block w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md"
               />
             </div>
             <div className="col-span-6">
