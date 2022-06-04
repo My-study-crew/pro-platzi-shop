@@ -26,7 +26,6 @@ function useProviderAuth() {
       },
     };
 
-    // Axios get method error, requested service error
     const { data: access_token } = await axios.post(endPoints.auth.login, { email, password }, options);
 
     // Token saved on local storage
@@ -41,5 +40,14 @@ function useProviderAuth() {
     }
   };
 
-  return { user, signIn };
+  const logOut = () => {
+    Cookie.remove('token');
+    setUser(null);
+    delete axios.defaults.headers.Authorization;
+
+    // Redirect to login page
+    window.location.href = '/login';
+  };
+
+  return { user, signIn, logOut };
 }
